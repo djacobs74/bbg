@@ -13,7 +13,7 @@ new Vue({
 	methods: {
 		phillipAttack: function() {
 			if (this.zombieType != 'None') {
-				var damage = this.calculateDamage(20, 40);
+				var damage = this.numberGenerator(20, 40);
 				this.enemyHealth -= damage;
 				this.enemyAttacks();
 				this.turnCounter();
@@ -21,23 +21,17 @@ new Vue({
 			}
 		},
 		enemyAttacks: function() {
-			var damage = this.calculateDamage(3, 10);
+			var damage = this.numberGenerator(3, 10);
 			this.playerHealth -= damage;
 
 		},
-		calculateDamage: function(min, max) {
-            return Math.max(Math.floor(Math.random() * max) + 1, min);
-        },
-        calculateHeal: function(min, max) {
-            return Math.max(Math.floor(Math.random() * max) + 1, min);
-        },
         turnCounter: function() {
         	this.turns -= 1;
 
         },
         phillipHeal: function() {
         	if (this.zombieType == 'None' && this.playerHealth < 100 && this.medPacks >= 1) {
-	        	var heal = this.calculateHeal(4, 10);
+	        	var heal = this.numberGenerator(4, 10);
 	        	this.playerHealth += heal;
 	        	if (this.playerHealth > 100) {
 	        		this.playerHealth = 100;
@@ -89,9 +83,11 @@ new Vue({
 				meds     = (this.numberGenerator(1, 10) + this.searchChance);
 				if (betaComp >= 11 && betaComp <= 13) {
 					this.betaComponents += 1;
-				} 
-				if (meds >= 10 && meds <= 13) {
-					this.medPacks += 1;
+				}
+				if (this.medPacks < 3) {
+					if (meds >= 10 && meds <= 13) {
+						this.medPacks += 1;
+					}
 				}
 				this.turnCounter();
 				this.searchChance -= 1;

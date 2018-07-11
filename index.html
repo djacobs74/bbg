@@ -16,6 +16,7 @@
 
 	<div id="app" class="container-fluid">
 		<div class="text-center"><h1>BETA BROWSER GAME</h1></div>
+
 		<div style="color: white" class="text-center">turns left: {{ turns }}</div>
 
 		<div class="row players">
@@ -33,7 +34,7 @@
 						<button v-bind:class="{ disabled: zombieType == 'None' }" class="attack" @click="phillipAttack">Attack!</button>
 					</div>
 					<br>
-					<div class="col-12 medPacks">Med Packs: {{ medPacks }}</div>
+					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
 
 				</div>
 			</div>
@@ -52,7 +53,7 @@
 				<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
 					<div class="col-12 text-center">Room: {{ room }}</div>
 					<div class="text-center">NO ZOMBIES HERE</div>
-					<div class="text-center">Searches Left: {{ searchChance }}</div>
+					<div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div>
 				</div>
 
 		</div>
