@@ -2,13 +2,14 @@ new Vue({
 	el: '#app',
 	data: {
 		playerHealth: 100,
-		enemyHealth: 100,
-		turns: 10,
+		enemyHealth: 0,
+		turns: 20,
 		zombieType: 'None',
+		room: 1,
 	},
 	methods: {
 		phillipAttack: function() {
-			var damage = this.calculateDamage(5, 10);
+			var damage = this.calculateDamage(20, 40);
 			this.enemyHealth -= damage;
 			this.enemyAttacks();
 			this.turnCounter();
@@ -44,24 +45,26 @@ new Vue({
     
         },
         move: function() {
-        	var zombie = '';
+        	var zombieType = '';
+        	var zombieHealth = '';
 
         	result = this.zombieGenerator(1, 12);
         	if (result >= 1 && result <= 3) {
-        		zombie = 'Alpha';
+        		zombieType = 'Alpha';
+        		zombieHealth = 50;
         	} else if (result >= 3 && result <= 6) {
-        		zombie = 'Beta';
+        		zombieType = 'Beta';
+        		zombieHealth = 75;
         	} else if (result >= 7 && result <= 9) {
-        		zombie = 'Zed';
+        		zombieType = 'Zed';
+        		zombieHealth = 100;
         	} else {
-        		zombie = 'None';
+        		zombieType = 'None';
         	}
-        	this.zombieType = zombie
-        	this.healthReset();
+        	this.zombieType = zombieType;
+        	this.enemyHealth = zombieHealth;
+        	this.room += 1;
         	this.turnCounter();
-        },
-        healthReset: function() {
-        	this.enemyHealth = 100;
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {

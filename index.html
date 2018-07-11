@@ -30,26 +30,28 @@
 						<button v-if="zombieType == 'None'" id="move" @click="move">Move</button>
 						<!-- <button id="search" @click="search">Search</button> -->
 						<button id="heal" @click="phillipHeal">Heal</button>
-						<button id="attack" @click="phillipAttack">Attack!</button>
+						<button v-if="zombieType != 'None'" id="attack" @click="phillipAttack">Attack!</button>
 					</div>
 
 				</div>
 			</div>
 		
-			<div v-if="zombieType != 'None'" class="col-4 offset-2 enemy">
-				<div class="text-center">ZOMBIE</div>
-				<div class="col-12 enemy">
-					{{ zombieType }}
-					<div class="col-12">
-						<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
+			
+				<div v-if="zombieType != 'None'" class="col-4 offset-2 enemy">
+					<div class="col-12 text-center">Room: {{ room }}</div>
+					<div class="col-12 enemy">
+						{{ zombieType }} Zombie
+						<div class="col-12">
+							<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
+						</div>
 					</div>
 				</div>
-			</div>
-		
-			<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
-				<div class="text-center">NO ZOMBIES HERE</div>
-			</div>
 			
+				<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
+					<div class="col-12 text-center">Room: {{ room }}</div>
+					<div class="text-center">NO ZOMBIES HERE</div>
+				</div>
+
 		</div>
 
 		<br>
