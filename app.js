@@ -6,6 +6,7 @@ new Vue({
 		turns: 20,
 		zombieType: 'None',
 		room: 1,
+		betaComponents: 0,
 	},
 	methods: {
 		phillipAttack: function() {
@@ -40,7 +41,7 @@ new Vue({
         	}
         	this.turnCounter();
         },
-        zombieGenerator: function(min, max) {
+        numberGenerator: function(min, max) {
         	return Math.max(Math.floor(Math.random() * max) + 1, min);
     
         },
@@ -48,7 +49,7 @@ new Vue({
         	var zombieType = '';
         	var zombieHealth = '';
 
-        	result = this.zombieGenerator(1, 12);
+        	result = this.numberGenerator(1, 12);
         	if (result >= 1 && result <= 3) {
         		zombieType = 'Alpha';
         		zombieHealth = 50;
@@ -70,6 +71,12 @@ new Vue({
         	if (this.enemyHealth <= 0) {
         		this.zombieType = 'None';
         	}
+		},
+		searchRoom: function() {
+			result = this.numberGenerator(1, 12);
+			if (result >= 1 && result <= 3) {
+				this.betaComponents += 1;
+			} 
 		}
 	},
 

@@ -28,7 +28,7 @@
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
 						<button v-if="zombieType == 'None'" id="move" @click="move">Move</button>
-						<!-- <button id="search" @click="search">Search</button> -->
+						<button v-if="zombieType == 'None' && room != '1'" id="search" @click="searchRoom">Search</button>
 						<button id="heal" @click="phillipHeal">Heal</button>
 						<button v-if="zombieType != 'None'" id="attack" @click="phillipAttack">Attack!</button>
 					</div>
@@ -57,7 +57,7 @@
 		<br>
 
 		<div class="row text-center components">
-			<div class="col-12"><h2>BETA components found:</h2></div>
+			<div class="col-12"><h2>BETA components found: {{ betaComponents }}</h2></div>
 			<div class="col-3 beta-b"><h1>B</h1></div>
 			<div class="col-3 beta-b"><h1>E</h1></div>
 			<div class="col-3 beta-b"><h1>T</h1></div>
