@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BETA GAME</title>
+    <title>BBG</title>
     <script src="https://npmcdn.com/vue/dist/vue.js"></script>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,35 +15,41 @@
 <body>
 
 	<div id="app" class="container-fluid">
-		<div class="text-center"><h1>BETA GAME</h1></div>
+		<div class="text-center"><h1>BETA BROWSER GAME</h1></div>
 		<div style="color: white" class="text-center">turns left: {{ turns }}</div>
 
 		<div class="row players">
 			<div class="col-4 offset-1 player">
 				<div class="text-center">PLAYER</div>
 				<div class="col-12 player">
-				Phillip Wong
+					Phillip Wong
 
-				<div class="col-12">
-					<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
-					<br>
-					<button id="move" @click="move">Move</button>
-					<!-- <button id="search" @click="search">Search</button> -->
-					<button id="heal" @click="phillipHeal">Heal</button>
-					<button id="attack" @click="phillipAttack">Attack!</button>
+					<div class="col-12">
+						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
+						<br>
+						<button id="move" @click="move">Move</button>
+						<!-- <button id="search" @click="search">Search</button> -->
+						<button id="heal" @click="phillipHeal">Heal</button>
+						<button id="attack" @click="phillipAttack">Attack!</button>
+					</div>
+
 				</div>
-
 			</div>
-			</div>
-			<div class="col-4 offset-2 enemy">
-				<div class="text-center">Zombie</div>
+		
+			<div v-if="zombieType != 'None'" class="col-4 offset-2 enemy">
+				<div class="text-center">ZOMBIE</div>
 				<div class="col-12 enemy">
-				{{ zombieType }}
-				<div class="col-12">
-					<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
+					{{ zombieType }}
+					<div class="col-12">
+						<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
+					</div>
 				</div>
 			</div>
+		
+			<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
+				<div class="text-center">NO ZOMBIES HERE</div>
 			</div>
+			
 		</div>
 
 		<br>

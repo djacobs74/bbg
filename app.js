@@ -4,7 +4,7 @@ new Vue({
 		playerHealth: 100,
 		enemyHealth: 100,
 		turns: 10,
-		zombieType: '',
+		zombieType: 'None',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -53,9 +53,14 @@ new Vue({
         	} else if (result >= 7 && result <= 9) {
         		zombie = 'Zed';
         	} else {
-        		zombie = '';
+        		zombie = 'None';
         	}
         	this.zombieType = zombie
+        	this.healthReset();
+        	this.turnCounter();
+        },
+        healthReset: function() {
+        	this.enemyHealth = 100;
         }
 	}
 })
