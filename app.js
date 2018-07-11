@@ -3,12 +3,12 @@ new Vue({
 	data: {
 		playerHealth: 100,
 		enemyHealth: 0,
-		turns: 20,
+		turns: 50,
 		zombieType: 'None',
 		room: 1,
 		betaComponents: 0,
-		searchChance: '',
-		medPacks: 1,
+		searchChance: 3,
+		medPacks: 0,
 	},
 	methods: {
 		phillipAttack: function() {
@@ -75,6 +75,7 @@ new Vue({
 	        	this.enemyHealth = zombieHealth;
 	        	this.room += 1;
 	        	this.turnCounter();
+	        	this.searchChance = 3;
 	        }
         },
         zombieDead: function() {
@@ -83,16 +84,19 @@ new Vue({
         	}
 		},
 		searchRoom: function() {
-			if (this.zombieType == 'None' && this.room != 1) {
-				betaComp = this.numberGenerator(1, 12);
-				meds = this.numberGenerator(1, 10);
-				if (betaComp >= 1 && betaComp <= 3) {
+			if (this.zombieType == 'None' && this.room != 1 && this.searchChance > 0) {
+				betaComp = (this.numberGenerator(1, 10) + this.searchChance);
+				meds     = (this.numberGenerator(1, 10) + this.searchChance);
+				if (betaComp >= 11 && betaComp <= 13) {
 					this.betaComponents += 1;
 				} 
-				if (meds >= 1 && meds <= 4) {
+				if (meds >= 10 && meds <= 13) {
 					this.medPacks += 1;
 				}
 				this.turnCounter();
+				this.searchChance -= 1;
+				console.log('betaComp ' + betaComp);
+				console.log('meds ' + meds);
 			}
 		}
 	},

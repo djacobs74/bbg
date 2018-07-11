@@ -28,7 +28,7 @@
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
 						<button v-bind:class="{ disabled: zombieType != 'None' }" class="move" @click="move">Move</button>
-						<button v-bind:class="{ disabled: zombieType != 'None' || room == '1' }" class="search" @click="searchRoom">Search</button>
+						<button v-bind:class="{ disabled: zombieType != 'None' || room == '1' || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
 						<button v-bind:class="{ disabled: zombieType != 'None' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
 						<button v-bind:class="{ disabled: zombieType == 'None' }" class="attack" @click="phillipAttack">Attack!</button>
 					</div>
@@ -52,6 +52,7 @@
 				<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
 					<div class="col-12 text-center">Room: {{ room }}</div>
 					<div class="text-center">NO ZOMBIES HERE</div>
+					<div class="text-center">Searches Left: {{ searchChance }}</div>
 				</div>
 
 		</div>
