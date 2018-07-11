@@ -20,25 +20,25 @@ h1 {
 }
 
 
-#attack {
+.attack {
 	background-color: red;
 	color: white;
 	cursor: pointer;
 }
 
-#move {
+.move {
 	background-color: white;
 	color: black;
 	cursor: pointer;
 }
 
-#search {
+.search {
 	background-color: blue;
 	color: white;
 	cursor: pointer;
 }
 
-#heal {
+.heal {
 	background-color: green;
 	color: white;
 	cursor: pointer;
@@ -46,6 +46,11 @@ h1 {
 
 .components {
 	color: white;
+}
+
+.disabled {
+	cursor: inherit;
+    opacity: 0.2;
 }
 
 
