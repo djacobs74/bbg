@@ -8,6 +8,7 @@ new Vue({
 		room: 1,
 		betaComponents: 0,
 		searchChance: '',
+		medPacks: 1,
 	},
 	methods: {
 		phillipAttack: function() {
@@ -35,7 +36,7 @@ new Vue({
 
         },
         phillipHeal: function() {
-        	if (this.zombieType == 'None' && this.playerHealth < 100) {
+        	if (this.zombieType == 'None' && this.playerHealth < 100 && this.medPacks >= 1) {
 	        	var heal = this.calculateHeal(4, 10);
 	        	this.playerHealth += heal;
 	        	if (this.playerHealth > 100) {
@@ -44,6 +45,7 @@ new Vue({
 	        		this.playerHealth;
 	        	}
 	        	this.turnCounter();
+	        	this.medPacks -= 1;
 	        }
         },
         numberGenerator: function(min, max) {
@@ -82,10 +84,14 @@ new Vue({
 		},
 		searchRoom: function() {
 			if (this.zombieType == 'None' && this.room != 1) {
-				result = this.numberGenerator(1, 12);
-				if (result >= 1 && result <= 3) {
+				betaComp = this.numberGenerator(1, 12);
+				meds = this.numberGenerator(1, 10);
+				if (betaComp >= 1 && betaComp <= 3) {
 					this.betaComponents += 1;
 				} 
+				if (meds >= 1 && meds <= 4) {
+					this.medPacks += 1;
+				}
 				this.turnCounter();
 			}
 		}
