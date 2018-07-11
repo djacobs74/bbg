@@ -4,6 +4,7 @@ new Vue({
 		playerHealth: 100,
 		enemyHealth: 100,
 		turns: 10,
+		zombieType: '',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -36,6 +37,25 @@ new Vue({
         		this.playerHealth;
         	}
         	this.turnCounter();
+        },
+        zombieGenerator: function(min, max) {
+        	return Math.max(Math.floor(Math.random() * max) + 1, min);
+    
+        },
+        move: function() {
+        	var zombie = '';
+
+        	result = this.zombieGenerator(1, 12);
+        	if (result >= 1 && result <= 3) {
+        		zombie = 'Alpha';
+        	} else if (result >= 3 && result <= 6) {
+        		zombie = 'Beta';
+        	} else if (result >= 7 && result <= 9) {
+        		zombie = 'Zed';
+        	} else {
+        		zombie = '';
+        	}
+        	this.zombieType = zombie
         }
 	}
 })
