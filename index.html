@@ -27,7 +27,7 @@
 					<div class="col-12">
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
-						<button id="move" @click="move">Move</button>
+						<button v-if="zombieType == 'None'" id="move" @click="move">Move</button>
 						<!-- <button id="search" @click="search">Search</button> -->
 						<button id="heal" @click="phillipHeal">Heal</button>
 						<button id="attack" @click="phillipAttack">Attack!</button>

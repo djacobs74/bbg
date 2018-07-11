@@ -12,6 +12,7 @@ new Vue({
 			this.enemyHealth -= damage;
 			this.enemyAttacks();
 			this.turnCounter();
+			this.zombieDead();
 		},
 		enemyAttacks: function() {
 			var damage = this.calculateDamage(3, 10);
@@ -61,7 +62,13 @@ new Vue({
         },
         healthReset: function() {
         	this.enemyHealth = 100;
-        }
-	}
+        },
+        zombieDead: function() {
+        	if (this.enemyHealth <= 0) {
+        		this.zombieType = 'None';
+        	}
+		}
+	},
+
 })
 
