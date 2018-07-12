@@ -36,13 +36,20 @@ new Vue({
 			}
 		},
 		enemyAttacks: function() {
-			var damage = this.numberGenerator(3, 10);
+			var damage = 0;
+			if (this.zombieType == 'Alpha') {
+				damage = this.numberGenerator(3, 6);
+			} else if (this.zombieType == 'Beta') {
+				damage = this.numberGenerator(5, 10);
+			} else if (this.zombieType == 'Zed') {
+				damage = this.numberGenerator(8, 12);
+			}
+
 			this.playerHealth -= damage;
 			this.turns.unshift({
 	                isPlayer: false,
 	                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
 	            });
-
 		},
         turnCounter: function() {
         	this.timer -= 1;
@@ -78,13 +85,13 @@ new Vue({
 	        	result = this.numberGenerator(1, 12);
 	        	if (result >= 1 && result <= 3) {
 	        		zombieType = 'Alpha';
-	        		zombieHealth = 50;
+	        		zombieHealth = 25;
 	        	} else if (result >= 3 && result <= 6) {
 	        		zombieType = 'Beta';
-	        		zombieHealth = 75;
+	        		zombieHealth = 50;
 	        	} else if (result >= 7 && result <= 9) {
 	        		zombieType = 'Zed';
-	        		zombieHealth = 100;
+	        		zombieHealth = 75;
 	        	} else {
 	        		zombieType = 'No';
 	        	}
