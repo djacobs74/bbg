@@ -30,10 +30,10 @@
 					<div class="col-12 no-pad">
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
-						<button v-bind:class="{ disabled: zombieType != 'None' }" class="move" @click="move">Move</button>
-						<button v-bind:class="{ disabled: zombieType != 'None' || room == '1' || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
-						<button v-bind:class="{ disabled: zombieType != 'None' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
-						<button v-bind:class="{ disabled: zombieType == 'None' }" class="attack" @click="phillipAttack">Attack!</button>
+						<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
+						<button v-bind:class="{ disabled: zombieType != 'No' || room == '1' || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
+						<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
+						<button v-bind:class="{ disabled: zombieType == 'No' }" class="attack" @click="phillipAttack">Attack!</button>
 					</div>
 					<br>
 					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
@@ -44,14 +44,14 @@
 			<div class="col-4 text-center log">LOG
 				<ul class="no-pad">
 	                <li v-for="turn in turns"
-	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer}">
+	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer, 'player-heal': turn.isHeal, 'player-move': turn.isMove}">
 	                    {{ turn.text }}
 	                </li>
             	</ul>
 			</div>
 		
 			<!-- ZOMBIE UI -->
-			<div v-if="zombieType != 'None'" class="col-3 enemy"> 
+			<div v-if="zombieType != 'No'" class="col-3 enemy"> 
 				<div class="col-12 text-center">Room: {{ room }}</div>
 				<div class="col-12 enemy text-right">
 					{{ zombieType }} Zombie
@@ -62,7 +62,7 @@
 			</div>
 		
 			<!-- EMPTY ROOM UI -->
-			<div v-if="zombieType == 'None'" class="col-3 all-clear">
+			<div v-if="zombieType == 'No'" class="col-3 all-clear">
 				<div class="col-12 text-center">Room: {{ room }}</div>
 				<div class="text-center">NO ZOMBIES HERE</div>
 				<div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div>

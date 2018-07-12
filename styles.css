@@ -95,9 +95,16 @@ h1 {
 }
 
 .log ul .zombie-turn {
-    color: red;
-    background-color: #ffc0c1;
+    color: white;
+    background-color: #ff0000;
 }
 
+.log ul .player-heal{
+    color: white;
+    background-color: #4d9900;
+}
 
-
+.log ul .player-move{
+    color: black;
+    background-color: white;
+}

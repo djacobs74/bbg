@@ -4,7 +4,7 @@ new Vue({
 		playerHealth: 100,
 		enemyHealth: 0,
 		timer: 50,
-		zombieType: 'None',
+		zombieType: 'No',
 		room: 1,
 		betaComponents: 0,
 		searchChance: 3,
@@ -13,10 +13,10 @@ new Vue({
 	},
 	methods: {
 		phillipAttack: function() {
-			if (this.zombieType != 'None') {
+			if (this.zombieType != 'No') {
 				var damage = this.numberGenerator(20, 40);
 				var deal = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
-				var dead = 'You Kill ' + this.zombieType + ' Zombie!!'
+				var dead = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
 				this.enemyHealth -= damage;
 				this.enemyAttacks();
 				this.turnCounter();
@@ -49,7 +49,7 @@ new Vue({
 
         },
         phillipHeal: function() {
-        	if (this.zombieType == 'None' && this.playerHealth < 100 && this.medPacks >= 1) {
+        	if (this.zombieType == 'No' && this.playerHealth < 100 && this.medPacks >= 1) {
 	        	var heal = this.numberGenerator(4, 10);
 	        	this.playerHealth += heal;
 	        	if (this.playerHealth > 100) {
@@ -59,6 +59,10 @@ new Vue({
 	        	}
 	        	this.turnCounter();
 	        	this.medPacks -= 1;
+	        	this.turns.unshift({
+	                isHeal: true,
+	                text: 'You use a medpack and heal for ' + heal + ' health'
+	            });
 	        }
         },
         numberGenerator: function(min, max) {
@@ -69,7 +73,7 @@ new Vue({
         	var zombieType = '';
         	var zombieHealth = '';
 
-        	if (this.zombieType === 'None') {
+        	if (this.zombieType === 'No') {
 
 	        	result = this.numberGenerator(1, 12);
 	        	if (result >= 1 && result <= 3) {
@@ -82,22 +86,26 @@ new Vue({
 	        		zombieType = 'Zed';
 	        		zombieHealth = 100;
 	        	} else {
-	        		zombieType = 'None';
+	        		zombieType = 'No';
 	        	}
 	        	this.zombieType = zombieType;
 	        	this.enemyHealth = zombieHealth;
 	        	this.room += 1;
 	        	this.turnCounter();
 	        	this.searchChance = 3;
+	        	this.turns.unshift({
+	                isMove: true,
+	                text: 'You move into a new Room. ' + zombieType + ' Zombie in here!'
+	            });
 	        }
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
-        		this.zombieType = 'None';
+        		this.zombieType = 'No';
         	}
 		},
 		searchRoom: function() {
-			if (this.zombieType == 'None' && this.room != 1 && this.searchChance > 0) {
+			if (this.zombieType == 'No' && this.room != 1 && this.searchChance > 0) {
 				betaComp = (this.numberGenerator(1, 10) + this.searchChance);
 				meds     = (this.numberGenerator(1, 10) + this.searchChance);
 				if (betaComp >= 11 && betaComp <= 13) {
