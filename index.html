@@ -16,8 +16,14 @@
 
 	<div id="app" class="container-fluid">
 		<div class="text-center"><h1>BETA: SOLE SURVIVOR</h1></div>
-
-		<div style="color: white" class="text-center">Time Left: {{ timer }}</div>
+		<br>
+		<div class="row">
+			<div class="col-4 offset-4">
+				<section class="text-center der-timer">Turns Left: {{ timer }}
+					<div class="text-center upload-bar" :style="{width: timer + '%'}"></div>
+				</section>
+			</div>
+		</div>
 		<br>
 
 		<!-- PLAYER UI -->
