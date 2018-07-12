@@ -67,3 +67,37 @@ h1 {
 	padding-left: 0px;
 }
 
+.turn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.log {
+	max-height: 300px;
+    overflow: hidden;
+}
+
+.log ul {
+    list-style: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.log ul li {
+    margin: 5px 20px 5px 20px;
+}
+
+.log ul .player-turn {
+    color: blue;
+    background-color: #e4e8ff;
+}
+
+.log ul .zombie-turn {
+    color: red;
+    background-color: #ffc0c1;
+}
+
+
+

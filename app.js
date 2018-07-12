@@ -3,30 +3,49 @@ new Vue({
 	data: {
 		playerHealth: 100,
 		enemyHealth: 0,
-		turns: 50,
+		timer: 50,
 		zombieType: 'None',
 		room: 1,
 		betaComponents: 0,
 		searchChance: 3,
 		medPacks: 0,
+		turns: [],
 	},
 	methods: {
 		phillipAttack: function() {
 			if (this.zombieType != 'None') {
 				var damage = this.numberGenerator(20, 40);
+				var deal = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
+				var dead = 'You Kill ' + this.zombieType + ' Zombie!!'
 				this.enemyHealth -= damage;
 				this.enemyAttacks();
 				this.turnCounter();
-				this.zombieDead();
+				if (this.enemyHealth <= 0) {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: dead 
+		            });
+				} else {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: deal 
+		            });
+		         }
+
+	            this.zombieDead();
 			}
 		},
 		enemyAttacks: function() {
 			var damage = this.numberGenerator(3, 10);
 			this.playerHealth -= damage;
+			this.turns.unshift({
+	                isPlayer: false,
+	                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
+	            });
 
 		},
         turnCounter: function() {
-        	this.turns -= 1;
+        	this.timer -= 1;
 
         },
         phillipHeal: function() {

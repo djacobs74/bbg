@@ -17,7 +17,8 @@
 	<div id="app" class="container-fluid">
 		<div class="text-center"><h1>BETA: SOLE SURVIVOR</h1></div>
 
-		<div style="color: white" class="text-center">turns left: {{ turns }}</div>
+		<div style="color: white" class="text-center">Time Left: {{ timer }}</div>
+		<br>
 
 		<!-- PLAYER UI -->
 		<div class="row players"> 
@@ -39,9 +40,14 @@
 				</div>
 			</div>
 
-			<!-- ACTION TEXT -->
-			<div class="col-4 text-center">
-				scrolling text here
+			<!-- LOG TEXT -->
+			<div class="col-4 text-center log">LOG
+				<ul class="no-pad">
+	                <li v-for="turn in turns"
+	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer}">
+	                    {{ turn.text }}
+	                </li>
+            	</ul>
 			</div>
 		
 			<!-- ZOMBIE UI -->
