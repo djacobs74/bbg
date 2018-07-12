@@ -51,6 +51,12 @@ h1 {
 	cursor: pointer;
 }
 
+.patch {
+	background-color: green;
+	color: white;
+	cursor: pointer;
+}
+
 .rest {
 	background-color: #b3ffb3;
 	color: black;
@@ -144,6 +150,11 @@ h1 {
 }
 
 .log ul .player-rest { 
+    color: black;
+    background-color: #b3ffb3;
+}
+
+.log ul .patch-zombie { 
     color: black;
     background-color: #b3ffb3;
 }

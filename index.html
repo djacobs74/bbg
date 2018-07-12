@@ -48,6 +48,8 @@
 					</div>
 					<br>
 					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
+					<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1)</div>
+					<div class="col-12"><button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 }" class="patch" @click="patchZombie">Patch Zombie</button></div>
 				</div>
 			</div>
 
@@ -55,7 +57,7 @@
 			<div class="col-4 text-center log">LOG
 				<ul class="no-pad">
 	                <li v-for="turn in turns"
-	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer, 'player-heal': turn.isHeal, 'player-move': turn.isMove, 'player-rest': turn.isRest}">
+	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer, 'player-heal': turn.isHeal, 'player-move': turn.isMove, 'player-rest': turn.isRest, 'patch-zombie': turn.isPatched}">
 	                    {{ turn.text }}
 	                </li>
             	</ul>

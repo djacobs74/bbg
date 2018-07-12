@@ -9,6 +9,7 @@ new Vue({
 		betaComponents: 0,
 		searchChance: 3,
 		medPacks: 0,
+		virusPatch: 0,
 		turns: [],
 	},
 	methods: {
@@ -115,6 +116,7 @@ new Vue({
 			if (this.zombieType == 'No' && this.room != 1 && this.searchChance > 0) {
 				betaComp = (this.numberGenerator(1, 10) + this.searchChance);
 				meds     = (this.numberGenerator(1, 10) + this.searchChance);
+				patch    = (this.numberGenerator(1, 10) + this.searchChance);
 				if (betaComp >= 11 && betaComp <= 13) {
 					this.betaComponents += 1;
 				}
@@ -123,10 +125,16 @@ new Vue({
 						this.medPacks += 1;
 					}
 				}
+				if (this.virusPatch < 1) {
+					if (patch == 10) {
+						this.virusPatch += 1;
+					}
+				}
 				this.turnCounter();
 				this.searchChance -= 1;
 				console.log('betaComp ' + betaComp);
 				console.log('meds ' + meds);
+				console.log('patch ' + patch);
 			}
 		},
 		rest: function() {
@@ -145,6 +153,17 @@ new Vue({
 	            });
 	        }
         },
+        patchZombie: function() {
+			if (this.zombieType != 'No' && this.virusPatch == 1) {
+				this.turnCounter();
+				this.turns.unshift({
+	                isPatched: true,
+	                text: 'You patched a zombie!' 
+	            });
+	            this.zombieType = 'No';
+			} 
+
+		},
 	},
 
 })
