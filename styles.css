@@ -57,5 +57,13 @@ h1 {
 	color: white;
 }
 
+.enemy .health-bar {
+	right: 0;
+    position: absolute;
+}
 
+.no-pad {
+	padding-right: 0px;
+	padding-left: 0px;
+}
 

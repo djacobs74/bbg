@@ -19,13 +19,14 @@
 
 		<div style="color: white" class="text-center">turns left: {{ turns }}</div>
 
-		<div class="row players">
-			<div class="col-4 offset-1 player">
+		<!-- PLAYER UI -->
+		<div class="row players"> 
+			<div class="col-3 offset-1 player">
 				<div class="text-center">PLAYER</div>
 				<div class="col-12 player">
 					Phillip Wong
 
-					<div class="col-12">
+					<div class="col-12 no-pad">
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
 						<button v-bind:class="{ disabled: zombieType != 'None' }" class="move" @click="move">Move</button>
@@ -35,26 +36,31 @@
 					</div>
 					<br>
 					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
+				</div>
+			</div>
 
+			<!-- ACTION TEXT -->
+			<div class="col-4 text-center">
+				scrolling text here
+			</div>
+		
+			<!-- ZOMBIE UI -->
+			<div v-if="zombieType != 'None'" class="col-3 enemy"> 
+				<div class="col-12 text-center">Room: {{ room }}</div>
+				<div class="col-12 enemy text-right">
+					{{ zombieType }} Zombie
+					<div class="col-12 no-pad">
+						<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
+					</div>
 				</div>
 			</div>
 		
-			
-				<div v-if="zombieType != 'None'" class="col-4 offset-2 enemy">
-					<div class="col-12 text-center">Room: {{ room }}</div>
-					<div class="col-12 enemy">
-						{{ zombieType }} Zombie
-						<div class="col-12">
-							<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
-						</div>
-					</div>
-				</div>
-			
-				<div v-if="zombieType == 'None'" class="col-4 offset-2 all-clear">
-					<div class="col-12 text-center">Room: {{ room }}</div>
-					<div class="text-center">NO ZOMBIES HERE</div>
-					<div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div>
-				</div>
+			<!-- EMPTY ROOM UI -->
+			<div v-if="zombieType == 'None'" class="col-3 all-clear">
+				<div class="col-12 text-center">Room: {{ room }}</div>
+				<div class="text-center">NO ZOMBIES HERE</div>
+				<div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div>
+			</div>
 
 		</div>
 
