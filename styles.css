@@ -82,23 +82,43 @@ h1 {
 }
 
 .log {
-	max-height: 300px;
+	height: 300px;
     overflow: hidden;
+    background-color: black;
+    position: relative;
+}
+
+.log ul:after {
+	content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background: rgba(150, 123, 19, 1);
+    background: -webkit-gradient(linear, 0% 0% 0% 100%, from(rgba(255, 255, 255, 0.1)), to(rgba(0, 0, 0, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 0), rgba(10, 0, 0, 1));
+    bottom: 0;
+    left: 0;
+    z-index: 10;
 }
 
 .log ul {
     list-style: none;
     font-weight: bold;
-    text-transform: uppercase;
+    text-transform: uppercase;    
 }
 
 .log ul li {
     margin: 5px 20px 5px 20px;
+    
 }
 
 .log ul .player-turn {
     color: blue;
-    background-color: #e4e8ff;
+    background-color: white;
 }
 
 .log ul .zombie-turn {
