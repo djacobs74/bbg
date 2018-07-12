@@ -28,8 +28,8 @@ h1 {
 }
 
 .attack {
-	background-color: red;
-	color: white;
+	background-color: white;
+	color: blue;
 	cursor: pointer;
 }
 
@@ -51,6 +51,12 @@ h1 {
 	cursor: pointer;
 }
 
+.rest {
+	background-color: #b3ffb3;
+	color: black;
+	cursor: pointer;
+}
+
 .components {
 	color: white;
 }
@@ -67,6 +73,7 @@ h1 {
 .enemy .health-bar {
 	right: 0;
     position: absolute;
+    background-color: #990000;
 }
 
 .no-pad {
@@ -126,14 +133,19 @@ h1 {
     background-color: #ff0000;
 }
 
-.log ul .player-heal{
+.log ul .player-heal {
     color: white;
     background-color: #4d9900;
 }
 
-.log ul .player-move{
+.log ul .player-move { 
     color: black;
     background-color: white;
+}
+
+.log ul .player-rest { 
+    color: black;
+    background-color: #b3ffb3;
 }
 
 .der-timer {

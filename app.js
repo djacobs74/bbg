@@ -50,7 +50,7 @@ new Vue({
         },
         phillipHeal: function() {
         	if (this.zombieType == 'No' && this.playerHealth < 100 && this.medPacks >= 1) {
-	        	var heal = this.numberGenerator(4, 10);
+	        	var heal = this.numberGenerator(10, 20);
 	        	this.playerHealth += heal;
 	        	if (this.playerHealth > 100) {
 	        		this.playerHealth = 100;
@@ -121,7 +121,23 @@ new Vue({
 				console.log('betaComp ' + betaComp);
 				console.log('meds ' + meds);
 			}
-		}
+		},
+		rest: function() {
+        	if (this.zombieType == 'No' && this.playerHealth < 100) {
+	        	var heal = this.numberGenerator(4, 8);
+	        	this.playerHealth += heal;
+	        	if (this.playerHealth > 100) {
+	        		this.playerHealth = 100;
+	        	} else {
+	        		this.playerHealth;
+	        	}
+	        	this.turnCounter();
+	        	this.turns.unshift({
+	                isRest: true,
+	                text: 'You rest and heal for ' + heal + ' health'
+	            });
+	        }
+        },
 	},
 
 })

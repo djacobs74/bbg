@@ -42,6 +42,7 @@
 						<br>
 						<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
 						<button v-bind:class="{ disabled: zombieType != 'No' || room == '1' || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
+						<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 }" class="rest" @click="rest">Rest</button>
 						<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
 						<button v-bind:class="{ disabled: zombieType == 'No' }" class="attack" @click="phillipAttack">Attack!</button>
 					</div>
@@ -54,7 +55,7 @@
 			<div class="col-4 text-center log">LOG
 				<ul class="no-pad">
 	                <li v-for="turn in turns"
-	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer, 'player-heal': turn.isHeal, 'player-move': turn.isMove}">
+	                    :class="{'player-turn': turn.isPlayer, 'zombie-turn': !turn.isPlayer, 'player-heal': turn.isHeal, 'player-move': turn.isMove, 'player-rest': turn.isRest}">
 	                    {{ turn.text }}
 	                </li>
             	</ul>
