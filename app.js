@@ -161,6 +161,7 @@ new Vue({
 	                text: 'You patched a zombie!' 
 	            });
 	            this.zombieType = 'No';
+	            this.virusPatch -= 1;
 			} 
 
 		},
