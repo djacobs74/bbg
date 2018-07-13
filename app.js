@@ -16,6 +16,7 @@ new Vue({
 		virusPatch: 0,
 		turns: [],
 		chanceText: '',
+		summon_dermajicker: 'false',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -49,7 +50,9 @@ new Vue({
 				damage = this.numberGenerator(5, 10);
 			} else if (this.zombieType == 'Zed') {
 				damage = this.numberGenerator(8, 12);
-			}
+			} else if (this.zombieType == 'Der Majicker') {
+				damage = this.numberGenerator(15, 20);
+			} 
 
 			this.playerHealth -= damage;
 			this.turns.unshift({
@@ -152,6 +155,7 @@ new Vue({
 				this.turnCounter();
 				this.searchChance -= 25;
 				this.chances();
+				this.betaCheck();
 			}
 		},
 		rest: function() {
@@ -213,6 +217,19 @@ new Vue({
 				this.beta_a += 1;
 			}
 			console.log('betaType result = ' + result);
+		},
+		betaCheck: function() {
+			if (beta_b > 0 && beta_e > 0 && beta_t > 0 && beta_a > 0) {
+				summon_dermajicker = 'true';
+			} else {
+				summon_dermajicker = 'false';
+			}
+		},
+		use_beta: function() {
+			if (this.zombieType === 'No') {
+				zombieType = 'Der Majicker';
+				zombieHealth = 100;
+			}
 		}
 	},
 
