@@ -170,11 +170,19 @@ new Vue({
 	        }
         },
         patchZombie: function() {
+        	var his_her = '';
+        	var result = this.numberGenerator(1, 2);
+        	if (result == 1) {
+        		his_her = 'his';
+        	} else {
+        		his_her = 'her'
+        	}
+
 			if (this.zombieType != 'No' && this.virusPatch == 1) {
 				this.turnCounter();
 				this.turns.unshift({
 	                isPatched: true,
-	                text: 'You patched a zombie!' 
+	                text: 'You patched a ' + this.zombieType + ' zombie! The Giantcorp employee thanks you and runs for ' + his_her + ' life!' 
 	            });
 	            this.zombieType = 'No';
 	            this.virusPatch -= 1;

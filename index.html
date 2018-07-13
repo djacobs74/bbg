@@ -48,8 +48,7 @@
 					</div>
 					<br>
 					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
-					<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1)</div>
-					<div class="col-12"><button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 }" class="patch" @click="patchZombie">Patch Zombie</button></div>
+					<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1) <button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 }" class="patch" @click="patchZombie">Patch Zombie</button></div>
 				</div>
 			</div>
 
