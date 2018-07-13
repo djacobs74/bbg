@@ -7,6 +7,10 @@ new Vue({
 		zombieType: 'No',
 		room: 0,
 		betaComponents: 0,
+		beta_b: 0,
+		beta_e: 0,
+		beta_t: 0,
+		beta_a: 0,
 		searchChance: 100,
 		medPacks: 0,
 		virusPatch: 0,
@@ -133,6 +137,7 @@ new Vue({
 				patch    = (this.numberGenerator(1, 10) + searches_left);
 				if (betaComp >= 9 && betaComp <= 13) {
 					this.betaComponents += 1;
+					this.betaType();
 				}
 				if (this.medPacks < 3) {
 					if (meds >= 9 && meds <= 13) {
@@ -147,10 +152,6 @@ new Vue({
 				this.turnCounter();
 				this.searchChance -= 25;
 				this.chances();
-				console.log('betaComp ' + betaComp);
-				console.log('meds ' + meds);
-				console.log('patch ' + patch);
-				console.log('searches left ' + searches_left);
 			}
 		},
 		rest: function() {
@@ -199,6 +200,19 @@ new Vue({
 			} else if (this.searchChance == 25) {
 				this.chanceText = ' Not Great . . .'
 			}
+		},
+		betaType: function() {
+			result = this.numberGenerator(1, 4);
+			if (result == 1) {
+				this.beta_b += 1;
+			} else if (result == 2) {
+				this.beta_e += 1;
+			} else if (result == 3) {
+				this.beta_t += 1;
+			} else {
+				this.beta_a += 1;
+			}
+			console.log('betaType result = ' + result);
 		}
 	},
 
