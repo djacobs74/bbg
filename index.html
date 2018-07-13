@@ -41,7 +41,7 @@
 						<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						<br>
 						<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
-						<button v-bind:class="{ disabled: zombieType != 'No' || room == '1' || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
+						<button v-bind:class="{ disabled: zombieType != 'No' || room == 0 || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
 						<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 }" class="rest" @click="rest">Rest</button>
 						<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
 						<button v-bind:class="{ disabled: zombieType == 'No' }" class="attack" @click="phillipAttack">Attack!</button>
@@ -76,9 +76,13 @@
 		
 			<!-- EMPTY ROOM UI -->
 			<div v-if="zombieType == 'No'" class="col-3 all-clear">
-				<div class="col-12 text-center">Room: {{ room }}</div>
-				<div class="text-center">NO ZOMBIES HERE</div>
-				<div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div>
+				<div v-if="room != 0" class="col-12 text-center">Room: {{ room }}</div>
+				<div v-if="room != 0" class="text-center">NO ZOMBIES HERE</div>
+				<div v-if="room == 0" class="col-12 text-center">I.T. Room</div>
+				<div v-if="room == 0" class="text-center">Move Out And Save The World One User At A Time!</div>
+				<div v-if="searchChance == 0" class="text-center">There Is Nothing Else Of Value Here. Time To Move On!</div>
+				<!-- <div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div> -->
+				<section class="text-center" v-if="room != 0 && searchChance != 0">Search Chance: {{ chanceText }}<!-- <div class="search-chance-bar" :style="{width: searchChance + '%'}"></div> --></section>
 			</div>
 		</div>
 

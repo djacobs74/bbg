@@ -5,12 +5,13 @@ new Vue({
 		enemyHealth: 0,
 		timer: 50,
 		zombieType: 'No',
-		room: 1,
+		room: 0,
 		betaComponents: 0,
-		searchChance: 3,
+		searchChance: 100,
 		medPacks: 0,
 		virusPatch: 0,
 		turns: [],
+		chanceText: '',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -100,12 +101,13 @@ new Vue({
 	        	this.enemyHealth = zombieHealth;
 	        	this.room += 1;
 	        	this.turnCounter();
-	        	this.searchChance = 3;
+	        	this.searchChance = 100;
 	        	this.turns.unshift({
 	                isMove: true,
 	                text: 'You move into a new Room. ' + zombieType + ' Zombie in here!'
 	            });
 	        }
+	        this.chances();
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
@@ -113,28 +115,42 @@ new Vue({
         	}
 		},
 		searchRoom: function() {
-			if (this.zombieType == 'No' && this.room != 1 && this.searchChance > 0) {
-				betaComp = (this.numberGenerator(1, 10) + this.searchChance);
-				meds     = (this.numberGenerator(1, 10) + this.searchChance);
-				patch    = (this.numberGenerator(1, 10) + this.searchChance);
-				if (betaComp >= 11 && betaComp <= 13) {
+			var searches_left = 0;
+			if (this.searchChance == 100) {
+				searches_left = 3;
+			} else if (this.searchChance == 75) {
+				searches_left = 2;
+			} else if (this.searchChance == 50) {
+				searches_left = 1;
+			} else if (this.searchChance == 25) {
+				searches_left = 0;
+			}
+			
+
+			if (this.zombieType == 'No' && this.room != 0 && this.searchChance > 0) {
+				betaComp = (this.numberGenerator(1, 10) + searches_left);
+				meds     = (this.numberGenerator(1, 10) + searches_left);
+				patch    = (this.numberGenerator(1, 10) + searches_left);
+				if (betaComp >= 9 && betaComp <= 13) {
 					this.betaComponents += 1;
 				}
 				if (this.medPacks < 3) {
-					if (meds >= 10 && meds <= 13) {
+					if (meds >= 9 && meds <= 13) {
 						this.medPacks += 1;
 					}
 				}
 				if (this.virusPatch < 1) {
-					if (patch == 10) {
+					if (patch >= 9 && patch <= 13) {
 						this.virusPatch += 1;
 					}
 				}
 				this.turnCounter();
-				this.searchChance -= 1;
+				this.searchChance -= 25;
+				this.chances();
 				console.log('betaComp ' + betaComp);
 				console.log('meds ' + meds);
 				console.log('patch ' + patch);
+				console.log('searches left ' + searches_left);
 			}
 		},
 		rest: function() {
@@ -165,6 +181,17 @@ new Vue({
 			} 
 
 		},
+		chances: function() {
+			if (this.searchChance == 100) {
+				this.chanceText = ' Excellent!'
+			} else if (this.searchChance == 75) {
+				this.chanceText = ' Not Bad.'
+			} else if (this.searchChance == 50) {
+				this.chanceText = ' Could Be Better.'
+			} else if (this.searchChance == 25) {
+				this.chanceText = ' Not Great . . .'
+			}
+		}
 	},
 
 })
