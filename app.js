@@ -219,16 +219,17 @@ new Vue({
 			console.log('betaType result = ' + result);
 		},
 		betaCheck: function() {
-			if (beta_b > 0 && beta_e > 0 && beta_t > 0 && beta_a > 0) {
-				summon_dermajicker = 'true';
+			if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
+				this.summon_dermajicker = 'true';
 			} else {
-				summon_dermajicker = 'false';
+				this.summon_dermajicker = 'false';
 			}
+			console.log('beta check ' + this.summon_dermajicker);
 		},
 		use_beta: function() {
-			if (this.zombieType === 'No') {
-				zombieType = 'Der Majicker';
-				zombieHealth = 100;
+			if (this.zombieType == 'No') {
+				this.zombieType = 'Der Majicker';
+				this.zombieHealth = 100;
 			}
 		}
 	},
