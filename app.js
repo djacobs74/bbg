@@ -183,7 +183,7 @@ new Vue({
         		his_her = 'her'
         	}
 
-			if (this.zombieType != 'No' && this.virusPatch == 1) {
+			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker' && this.virusPatch == 1) {
 				this.turnCounter();
 				this.turns.unshift({
 	                isPatched: true,
@@ -230,7 +230,10 @@ new Vue({
 			if (this.zombieType == 'No') {
 				this.zombieType = 'Der Majicker';
 				this.zombieHealth = 100;
+				this.enemyHealth = 100;
+				this.summon_dermajicker = 'false';
 			}
+
 		}
 	},
 
