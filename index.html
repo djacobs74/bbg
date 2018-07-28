@@ -63,18 +63,23 @@
 			</div>
 		
 			<!-- ZOMBIE UI -->
-			<div v-if="zombieType != 'No'" class="col-3 enemy"> 
-				<div class="col-12 text-center">Room: {{ room }}</div>
-				<div class="col-12 enemy text-right">
-					{{ zombieType }} Zombie
-					<div class="col-12 no-pad">
-						<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
-					</div>
+			<div v-if="zombieType != 'No'" class="col-3 enemy">
+				<img v-if="zombieType == 'Alpha'" class="img-round" src="static/img/alphaz.png">
+				<img v-if="zombieType == 'Beta'" class="img-round" src="static/img/betaz.png">
+				<img v-if="zombieType == 'Zed'" class="img-round" src="static/img/zedz.png">
+				<img v-if="zombieType == 'Der Majicker'" class="img-round" src="static/img/dermagicker.png"> 
+				<div class="row">
+					<div class="col-6 text-left">Room: {{ room }}</div>
+					<div class="col-6 enemy text-right">{{ zombieType }} Zombie</div>
+				</div>
+				<div class="col-12 no-pad">
+					<section>Health: {{ enemyHealth }}<div class="health-bar" :style="{width: enemyHealth + '%'}"></div></section>
 				</div>
 			</div>
 		
 			<!-- EMPTY ROOM UI -->
 			<div v-if="zombieType == 'No'" class="col-3 all-clear">
+				<img class="img-round" style="max-width: 178px;" src="static/img/background.png">
 				<div v-if="room != 0" class="col-12 text-center">Room: {{ room }}</div>
 				<div v-if="room != 0" class="text-center">NO ZOMBIES HERE</div>
 				<div v-if="room == 0" class="col-12 text-center">I.T. Room</div>

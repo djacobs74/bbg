@@ -6,6 +6,11 @@ h1 {
 	color: blue;
 }
 
+button {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 .players {
 	color: white;
 }
@@ -191,5 +196,12 @@ h1 {
 
 .img-round {
     border-radius: 50%;
-    margin: 20px;
+    margin-bottom: 20px;
+}
+
+.enemy img, .all-clear img {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
