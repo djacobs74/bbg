@@ -188,3 +188,8 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
 }
+
+.img-round {
+    border-radius: 50%;
+    margin: 20px;
+}

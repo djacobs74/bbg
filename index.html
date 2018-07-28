@@ -33,7 +33,7 @@
 		<!-- PLAYER UI -->
 		<div class="row players"> 
 			<div class="col-3 offset-1 player">
-				<div class="text-center">PLAYER</div>
+				<img class="img-round" src="static/img/phillip.png">
 				<div class="col-12 player">
 					Phillip Wong
 
@@ -48,7 +48,7 @@
 					</div>
 					<br>
 					<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
-					<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1) <button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 }" class="patch" @click="patchZombie">Patch Zombie</button></div>
+					<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1) <button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 || zombieType == 'Der Majicker'}" class="patch" @click="patchZombie">Patch Zombie</button></div>
 				</div>
 			</div>
 
