@@ -25,7 +25,7 @@ new Vue({
 				var deal = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
 				var dead = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
 				this.enemyHealth -= damage;
-				this.enemyAttacks();
+				
 				this.turnCounter();
 				if (this.enemyHealth <= 0) {
 					this.turns.unshift({
@@ -37,9 +37,11 @@ new Vue({
 		                isPlayer: true,
 		                text: deal 
 		            });
+		            this.enemyAttacks();
 		         }
 
-	            this.zombieDead();
+		        this.zombieDead();
+	            
 			}
 		},
 		enemyAttacks: function() {
@@ -59,6 +61,8 @@ new Vue({
 	                isPlayer: false,
 	                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
 	            });
+			this.game_over();
+
 		},
         turnCounter: function() {
         	this.timer -= 1;
@@ -238,6 +242,15 @@ new Vue({
 		start_game: function() {
 			$('.game-off').hide();
 			$('.game-on').show();
+		},
+		game_over: function() {
+			if (this.playerHealth <= 0) {
+				this.turns.unshift({
+	                isPlayer: false,
+	                text: 'You have been turned into a Zombie! All hope is lost . . Der Majicker' + "'s" + ' virus is unleashed upon the world!'
+	            });
+	 			this.playerHealth = '0';
+			}
 		}
 	},
 

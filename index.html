@@ -57,7 +57,8 @@
 			<!-- PLAYER UI -->
 			<div class="row players"> 
 				<div class="col-3 offset-1 player">
-					<img class="img-round" src="static/img/phillip.png">
+					<img v-if="playerHealth > 0" class="img-round" src="static/img/phillip.png">
+					<img v-if="playerHealth <= 0" class="img-round" src="static/img/phillipz.png">
 					<div class="col-12 player">
 						Phillip Wong
 
