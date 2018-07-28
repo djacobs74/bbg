@@ -231,3 +231,18 @@ button {
     color: white;
 }
 
+.spacer {
+    height: 10px;
+}
+
+.players img {
+    border: 3px solid white;
+}
+
+.enemy img {
+    border: 3px solid red;
+}
+
+.all-clear img {
+    border: 3px solid blue;
+}

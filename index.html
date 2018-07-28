@@ -64,16 +64,18 @@
 
 						<div class="col-12 no-pad">
 							<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
+						</div>
+						<div class="col-12 no-pad" v-if="playerHealth > 0">
 							<br>
 							<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || room == 0 || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 }" class="rest" @click="rest">Rest</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
 							<button v-bind:class="{ disabled: zombieType == 'No' }" class="attack" @click="phillipAttack">Attack!</button>
+							<div class="spacer"></div>
+							<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
+							<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1) <button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 || zombieType == 'Der Majicker'}" class="patch" @click="patchZombie">Patch Zombie</button></div>
 						</div>
-						<br>
-						<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>
-						<div class="col-12 virusPatch">Virus Patch: {{ virusPatch }} (max 1) <button v-bind:class="{ disabled: zombieType == 'No' || virusPatch < 1 || zombieType == 'Der Majicker'}" class="patch" @click="patchZombie">Patch Zombie</button></div>
 					</div>
 				</div>
 
