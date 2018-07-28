@@ -6,6 +6,11 @@ h1 {
 	color: blue;
 }
 
+button {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
 .players {
 	color: white;
 }
@@ -180,4 +185,23 @@ h1 {
 
 .virusPatch button {
     margin-left: 5px;
+}
+
+.summon {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.img-round {
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.enemy img, .all-clear img {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
 }
