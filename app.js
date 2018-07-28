@@ -234,6 +234,10 @@ new Vue({
 				this.summon_dermajicker = 'false';
 			}
 
+		},
+		start_game: function() {
+			$('.game-off').hide();
+			$('.game-on').show();
 		}
 	},
 

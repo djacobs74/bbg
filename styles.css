@@ -203,5 +203,31 @@ button {
     display: block;
     position: relative;
     margin-left: auto;
-    margin-right: auto;
 }
+
+.game-on {
+    display: none;
+}
+
+.game-off {
+    display: block;
+}
+
+.game-off .intro {
+    color: white;
+}
+
+#start {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+}
+
+.game-off .choose {
+    color: white;
+}
+
