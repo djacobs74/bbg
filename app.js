@@ -17,30 +17,56 @@ new Vue({
 		turns: [],
 		chanceText: '',
 		summon_dermajicker: 'false',
+		game_win: '',
+		dm_dead: 'false',
 	},
 	methods: {
 		phillipAttack: function() {
-			if (this.zombieType != 'No') {
-				var damage = this.numberGenerator(20, 40);
-				var deal = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
-				var dead = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
+			var damage = this.numberGenerator(20, 40);
+			var deal_a_b_z = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
+			var deal_d_m = 'You deal ' + damage + ' damage to ' + this.zombieType
+			var dead_a_b_z = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
+			var dead_d_m = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' !!'
+			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker') {
 				this.enemyHealth -= damage;
-				this.enemyAttacks();
-				this.turnCounter();
+				
+
 				if (this.enemyHealth <= 0) {
 					this.turns.unshift({
 		                isPlayer: true,
-		                text: dead 
+		                text: dead_a_b_z 
 		            });
+				} else if (this.zombieType != 'Der Majicker') {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: deal_a_b_z 
+		            });
+		            this.enemyAttacks();
+		        } 
+		        this.turnCounter();
+	            
+			} else if (this.zombieType === 'Der Majicker') {
+				this.enemyHealth -= damage;
+			
+
+				if (this.enemyHealth <= 0) {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: dead_d_m 
+		            });
+		            this.dm_dead = 'true';
 				} else {
 					this.turns.unshift({
 		                isPlayer: true,
-		                text: deal 
+		                text: deal_d_m 
 		            });
-		         }
-
-	            this.zombieDead();
+		            this.enemyAttacks();
+		        }
+				this.turnCounter();
 			}
+		
+			this.zombieDead();
+
 		},
 		enemyAttacks: function() {
 			var damage = 0;
@@ -55,16 +81,28 @@ new Vue({
 			} 
 
 			this.playerHealth -= damage;
-			this.turns.unshift({
+
+			if (this.zombieType != 'Der Majicker') {
+				this.turns.unshift({
+		                isPlayer: false,
+		                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
+		            });
+			} else {
+				this.turns.unshift({
 	                isPlayer: false,
-	                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
+	                text: this.zombieType + ' deals ' + damage + ' damage to you!'
 	            });
+			}
+
+			this.game_over();
+
 		},
         turnCounter: function() {
         	this.timer -= 1;
+        	this.win_check();
 
         },
-        phillipHeal: function() {
+        useMedpack: function() {
         	if (this.zombieType == 'No' && this.playerHealth < 100 && this.medPacks >= 1) {
 	        	var heal = this.numberGenerator(10, 20);
 	        	this.playerHealth += heal;
@@ -73,12 +111,13 @@ new Vue({
 	        	} else {
 	        		this.playerHealth;
 	        	}
-	        	this.turnCounter();
+	        	
 	        	this.medPacks -= 1;
 	        	this.turns.unshift({
 	                isHeal: true,
 	                text: 'You use a medpack and heal for ' + heal + ' health'
 	            });
+	            this.turnCounter();
 	        }
         },
         numberGenerator: function(min, max) {
@@ -107,18 +146,21 @@ new Vue({
 	        	this.zombieType = zombieType;
 	        	this.enemyHealth = zombieHealth;
 	        	this.room += 1;
-	        	this.turnCounter();
+	        	
 	        	this.searchChance = 100;
 	        	this.turns.unshift({
 	                isMove: true,
 	                text: 'You move into a new Room. ' + zombieType + ' Zombie in here!'
 	            });
+	            this.turnCounter();
 	        }
 	        this.chances();
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
+        		this.win_check();
         		this.zombieType = 'No';
+        		
         	}
 		},
 		searchRoom: function() {
@@ -152,10 +194,11 @@ new Vue({
 						this.virusPatch += 1;
 					}
 				}
-				this.turnCounter();
+				
 				this.searchChance -= 25;
 				this.chances();
 				this.betaCheck();
+				this.turnCounter();
 			}
 		},
 		rest: function() {
@@ -167,11 +210,12 @@ new Vue({
 	        	} else {
 	        		this.playerHealth;
 	        	}
-	        	this.turnCounter();
+	        	
 	        	this.turns.unshift({
 	                isRest: true,
 	                text: 'You rest and heal for ' + heal + ' health'
 	            });
+	            this.turnCounter();
 	        }
         },
         patchZombie: function() {
@@ -184,13 +228,14 @@ new Vue({
         	}
 
 			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker' && this.virusPatch == 1) {
-				this.turnCounter();
+				
 				this.turns.unshift({
 	                isPatched: true,
 	                text: 'You patched a ' + this.zombieType + ' zombie! The Giantcorp employee thanks you and runs for ' + his_her + ' life!' 
 	            });
 	            this.zombieType = 'No';
 	            this.virusPatch -= 1;
+	            this.turnCounter();
 			} 
 
 		},
@@ -219,21 +264,54 @@ new Vue({
 			console.log('betaType result = ' + result);
 		},
 		betaCheck: function() {
-			if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
-				this.summon_dermajicker = 'true';
-			} else {
-				this.summon_dermajicker = 'false';
+			if (this.game_win == '') {
+				if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
+					this.summon_dermajicker = 'true';
+				} else {
+					this.summon_dermajicker = 'false';
+				}
+				console.log('beta check ' + this.summon_dermajicker);
 			}
-			console.log('beta check ' + this.summon_dermajicker);
 		},
 		use_beta: function() {
-			if (this.zombieType == 'No') {
+			if (this.zombieType == 'No' && this.summon_dermajicker == 'true') {
 				this.zombieType = 'Der Majicker';
 				this.zombieHealth = 100;
 				this.enemyHealth = 100;
 				this.summon_dermajicker = 'false';
+			}		
+		},
+		start_game: function() {
+			$('.game-off').hide();
+			$('.game-on').show();
+		},
+		game_over: function() {
+			if (this.playerHealth <= 0) {
+				this.turns.unshift({
+	                isPlayer: false,
+	                text: 'You have been turned into a Zombie! All hope is lost . . Der Majicker' + "'s" + ' virus is unleashed upon the world!'
+	            });
+	 			this.playerHealth = '0';
+	 			this.game_win = 'false';
 			}
-
+		},
+		start_new: function() {
+			location.reload();
+		},
+		win_check: function() { //run this function somewhere above
+			if (this.timer === 0) {
+				if (this.dm_dead === 'true') {
+					this.game_win = 'true';	
+				} else if (this.dm_dead === 'false') {
+					this.game_win = 'false';	
+				}
+			} else if (this.timer > 0) {
+				if (this.dm_dead === 'true') {
+					this.game_win = 'true';	
+				} 
+			}
+				 
+			console.log('win check = ' + this.game_win);
 		}
 	},
 
