@@ -158,7 +158,6 @@ new Vue({
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
-        		this.win_check();
         		this.zombieType = 'No';
         		
         	}
