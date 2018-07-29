@@ -60,12 +60,14 @@
 					<img v-if="playerHealth > 0" class="img-round" src="static/img/phillip.png">
 					<img v-if="playerHealth <= 0" class="img-round" src="static/img/phillipz.png">
 					<div class="col-12 player">
-						Phillip Wong
-
+						<div>Phillip Wong</div>
 						<div class="col-12 no-pad">
 							<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						</div>
-						<div class="col-12 no-pad" v-if="playerHealth > 0">
+						<div class="col-12 no-pad" v-if="playerHealth == 0 || game_win == 'true'">
+							<button class="start-new" @click="start_new">Start New Game</button>
+						</div>
+						<div class="col-12 no-pad" v-if="playerHealth > 0 && game_win == 'false'">
 							<br>
 							<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || room == 0 || searchChance == 0 }" class="search" @click="searchRoom">Search</button>

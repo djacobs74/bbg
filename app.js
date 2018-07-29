@@ -17,6 +17,7 @@ new Vue({
 		turns: [],
 		chanceText: '',
 		summon_dermajicker: 'false',
+		game_win: 'false',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -41,6 +42,7 @@ new Vue({
 		         }
 
 		        this.zombieDead();
+
 	            
 			}
 		},
@@ -122,7 +124,9 @@ new Vue({
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
+        		this.win_check(); //fix
         		this.zombieType = 'No';
+        		
         	}
 		},
 		searchRoom: function() {
@@ -250,6 +254,15 @@ new Vue({
 	                text: 'You have been turned into a Zombie! All hope is lost . . Der Majicker' + "'s" + ' virus is unleashed upon the world!'
 	            });
 	 			this.playerHealth = '0';
+			}
+		},
+		start_new: function() {
+			location.reload();
+		},
+		win_check: function() { //run this function somewhere above
+			if (this.zombieType == 'Der Majicker' && this.enemyHealth <= 0) {
+				this.game_win = 'true';
+				console.log('win check = ' + this.game_win);
 			}
 		}
 	},

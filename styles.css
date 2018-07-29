@@ -246,3 +246,12 @@ button {
 .all-clear img {
     border: 3px solid blue;
 }
+
+.start-new {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
