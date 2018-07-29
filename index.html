@@ -45,9 +45,12 @@
 		<!-- GAME HAS STARTED! -->
 		<div class="game-on">
 			<!-- YOU WON THE GAME! -->
-			<div class="row" v-if="game_win == 'true'">
-				<div class="col-12 text-center">
+			<div class="row" v-if="game_win != ''">
+				<div v-if="game_win == 'true'"class="col-12 text-center">
 					<h3>CONGRATULATIONS! YOU HAVE DEFEATED DER MAJICKER AND SAVED THE WORLD!</h3>
+				</div>
+				<div v-if="game_win == 'false'"class="col-12 text-center">
+					<h3>DER MAJICKER HAS UPLOADED HIS ZOMBIE VIRUS TO THE INTERNET! YOU HAVE BEEN TURNED INTO A ZOMBIE!!</h3>
 				</div>
 				<div class="spacer"></div>
 			</div> 
@@ -64,8 +67,8 @@
 			<!-- PLAYER UI -->
 			<div class="row players"> 
 				<div class="col-3 offset-1 player">
-					<img v-if="playerHealth > 0" class="img-round" src="static/img/phillip.png">
-					<img v-if="playerHealth <= 0" class="img-round" src="static/img/phillipz.png">
+					<img v-if="game_win != 'false'" class="img-round" src="static/img/phillip.png">
+					<img v-if="game_win == 'false'" class="img-round" src="static/img/phillipz.png">
 					<div class="col-12 player">
 						<div>Phillip Wong</div>
 						<div class="col-12 no-pad">

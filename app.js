@@ -264,21 +264,22 @@ new Vue({
 			console.log('betaType result = ' + result);
 		},
 		betaCheck: function() {
-			if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
-				this.summon_dermajicker = 'true';
-			} else {
-				this.summon_dermajicker = 'false';
+			if (this.game_win == '') {
+				if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
+					this.summon_dermajicker = 'true';
+				} else {
+					this.summon_dermajicker = 'false';
+				}
+				console.log('beta check ' + this.summon_dermajicker);
 			}
-			console.log('beta check ' + this.summon_dermajicker);
 		},
 		use_beta: function() {
-			if (this.zombieType == 'No') {
+			if (this.zombieType == 'No' && this.summon_dermajicker == 'true') {
 				this.zombieType = 'Der Majicker';
 				this.zombieHealth = 100;
 				this.enemyHealth = 100;
 				this.summon_dermajicker = 'false';
-			}
-
+			}		
 		},
 		start_game: function() {
 			$('.game-off').hide();
