@@ -72,10 +72,10 @@
 							<section>Health: {{ playerHealth }}<div class="health-bar" :style="{width: playerHealth + '%'}"></div></section>
 						</div>
 						<div class="spacer"></div>
-						<div class="col-12 no-pad" v-if="playerHealth == 0 || game_win == 'true'">
+						<div class="col-12 no-pad" v-if="game_win != ''">
 							<button class="start-new" @click="start_new">Start New Game</button>
 						</div>
-						<div class="col-12 no-pad" v-if="playerHealth > 0 && game_win == 'false'">
+						<div class="col-12 no-pad" v-if="playerHealth > 0 && game_win == ''">
 							<br>
 							<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || room == 0 || searchChance == 0 }" class="search" @click="searchRoom">Search</button>

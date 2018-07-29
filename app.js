@@ -17,7 +17,8 @@ new Vue({
 		turns: [],
 		chanceText: '',
 		summon_dermajicker: 'false',
-		game_win: 'false',
+		game_win: '',
+		dm_dead: 'false',
 	},
 	methods: {
 		phillipAttack: function() {
@@ -28,7 +29,7 @@ new Vue({
 			var dead_d_m = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' !!'
 			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker') {
 				this.enemyHealth -= damage;
-				this.turnCounter();
+				
 
 				if (this.enemyHealth <= 0) {
 					this.turns.unshift({
@@ -42,16 +43,18 @@ new Vue({
 		            });
 		            this.enemyAttacks();
 		        } 
+		        this.turnCounter();
 	            
 			} else if (this.zombieType === 'Der Majicker') {
 				this.enemyHealth -= damage;
-				this.turnCounter();
+			
 
 				if (this.enemyHealth <= 0) {
 					this.turns.unshift({
 		                isPlayer: true,
 		                text: dead_d_m 
 		            });
+		            this.dm_dead = 'true';
 				} else {
 					this.turns.unshift({
 		                isPlayer: true,
@@ -59,9 +62,11 @@ new Vue({
 		            });
 		            this.enemyAttacks();
 		        }
+				this.turnCounter();
 			}
-
+		
 			this.zombieDead();
+
 		},
 		enemyAttacks: function() {
 			var damage = 0;
@@ -94,6 +99,7 @@ new Vue({
 		},
         turnCounter: function() {
         	this.timer -= 1;
+        	this.win_check();
 
         },
         phillipHeal: function() {
@@ -105,12 +111,13 @@ new Vue({
 	        	} else {
 	        		this.playerHealth;
 	        	}
-	        	this.turnCounter();
+	        	
 	        	this.medPacks -= 1;
 	        	this.turns.unshift({
 	                isHeal: true,
 	                text: 'You use a medpack and heal for ' + heal + ' health'
 	            });
+	            this.turnCounter();
 	        }
         },
         numberGenerator: function(min, max) {
@@ -139,12 +146,13 @@ new Vue({
 	        	this.zombieType = zombieType;
 	        	this.enemyHealth = zombieHealth;
 	        	this.room += 1;
-	        	this.turnCounter();
+	        	
 	        	this.searchChance = 100;
 	        	this.turns.unshift({
 	                isMove: true,
 	                text: 'You move into a new Room. ' + zombieType + ' Zombie in here!'
 	            });
+	            this.turnCounter();
 	        }
 	        this.chances();
         },
@@ -186,10 +194,11 @@ new Vue({
 						this.virusPatch += 1;
 					}
 				}
-				this.turnCounter();
+				
 				this.searchChance -= 25;
 				this.chances();
 				this.betaCheck();
+				this.turnCounter();
 			}
 		},
 		rest: function() {
@@ -201,11 +210,12 @@ new Vue({
 	        	} else {
 	        		this.playerHealth;
 	        	}
-	        	this.turnCounter();
+	        	
 	        	this.turns.unshift({
 	                isRest: true,
 	                text: 'You rest and heal for ' + heal + ' health'
 	            });
+	            this.turnCounter();
 	        }
         },
         patchZombie: function() {
@@ -218,13 +228,14 @@ new Vue({
         	}
 
 			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker' && this.virusPatch == 1) {
-				this.turnCounter();
+				
 				this.turns.unshift({
 	                isPatched: true,
 	                text: 'You patched a ' + this.zombieType + ' zombie! The Giantcorp employee thanks you and runs for ' + his_her + ' life!' 
 	            });
 	            this.zombieType = 'No';
 	            this.virusPatch -= 1;
+	            this.turnCounter();
 			} 
 
 		},
@@ -280,16 +291,26 @@ new Vue({
 	                text: 'You have been turned into a Zombie! All hope is lost . . Der Majicker' + "'s" + ' virus is unleashed upon the world!'
 	            });
 	 			this.playerHealth = '0';
+	 			this.game_win = 'false';
 			}
 		},
 		start_new: function() {
 			location.reload();
 		},
 		win_check: function() { //run this function somewhere above
-			if (this.zombieType == 'Der Majicker' && this.enemyHealth <= 0) {
-				this.game_win = 'true';
-				console.log('win check = ' + this.game_win);
+			if (this.timer === 0) {
+				if (this.dm_dead === 'true') {
+					this.game_win = 'true';	
+				} else if (this.dm_dead === 'false') {
+					this.game_win = 'false';	
+				}
+			} else if (this.timer > 0) {
+				if (this.dm_dead === 'true') {
+					this.game_win = 'true';	
+				} 
 			}
+				 
+			console.log('win check = ' + this.game_win);
 		}
 	},
 
