@@ -80,7 +80,7 @@
 							<button v-bind:class="{ disabled: zombieType != 'No' }" class="move" @click="move">Move</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || room == 0 || searchChance == 0 }" class="search" @click="searchRoom">Search</button>
 							<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 }" class="rest" @click="rest">Rest</button>
-							<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="heal" @click="phillipHeal">Heal</button>
+							<button v-bind:class="{ disabled: zombieType != 'No' || playerHealth == 100 || medPacks < 1}" class="med-pack" @click="useMedpack">Use Medpack</button>
 							<button v-bind:class="{ disabled: zombieType == 'No' }" class="attack" @click="phillipAttack">Attack!</button>
 							<div class="spacer"></div>
 							<div class="col-12 medPacks">Med Packs: {{ medPacks }} (max 3)</div>

@@ -102,7 +102,7 @@ new Vue({
         	this.win_check();
 
         },
-        phillipHeal: function() {
+        useMedpack: function() {
         	if (this.zombieType == 'No' && this.playerHealth < 100 && this.medPacks >= 1) {
 	        	var heal = this.numberGenerator(10, 20);
 	        	this.playerHealth += heal;
