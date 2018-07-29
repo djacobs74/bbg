@@ -21,30 +21,47 @@ new Vue({
 	},
 	methods: {
 		phillipAttack: function() {
-			if (this.zombieType != 'No') {
-				var damage = this.numberGenerator(20, 40);
-				var deal = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
-				var dead = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
+			var damage = this.numberGenerator(20, 40);
+			var deal_a_b_z = 'You deal ' + damage + ' damage to ' + this.zombieType + ' Zombie'
+			var deal_d_m = 'You deal ' + damage + ' damage to ' + this.zombieType
+			var dead_a_b_z = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' Zombie!!'
+			var dead_d_m = 'You deal ' + damage + ' damage and kill ' + this.zombieType + ' !!'
+			if (this.zombieType != 'No' && this.zombieType != 'Der Majicker') {
 				this.enemyHealth -= damage;
-				
 				this.turnCounter();
+
 				if (this.enemyHealth <= 0) {
 					this.turns.unshift({
 		                isPlayer: true,
-		                text: dead 
+		                text: dead_a_b_z 
+		            });
+				} else if (this.zombieType != 'Der Majicker') {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: deal_a_b_z 
+		            });
+		            this.enemyAttacks();
+		        } 
+	            
+			} else if (this.zombieType === 'Der Majicker') {
+				this.enemyHealth -= damage;
+				this.turnCounter();
+
+				if (this.enemyHealth <= 0) {
+					this.turns.unshift({
+		                isPlayer: true,
+		                text: dead_d_m 
 		            });
 				} else {
 					this.turns.unshift({
 		                isPlayer: true,
-		                text: deal 
+		                text: deal_d_m 
 		            });
 		            this.enemyAttacks();
-		         }
-
-		        this.zombieDead();
-
-	            
+		        }
 			}
+
+			this.zombieDead();
 		},
 		enemyAttacks: function() {
 			var damage = 0;
@@ -59,10 +76,19 @@ new Vue({
 			} 
 
 			this.playerHealth -= damage;
-			this.turns.unshift({
+
+			if (this.zombieType != 'Der Majicker') {
+				this.turns.unshift({
+		                isPlayer: false,
+		                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
+		            });
+			} else {
+				this.turns.unshift({
 	                isPlayer: false,
-	                text: this.zombieType + ' Zombie deals ' + damage + ' damage to you!'
+	                text: this.zombieType + ' deals ' + damage + ' damage to you!'
 	            });
+			}
+
 			this.game_over();
 
 		},
@@ -124,7 +150,7 @@ new Vue({
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
-        		this.win_check(); //fix
+        		this.win_check();
         		this.zombieType = 'No';
         		
         	}
