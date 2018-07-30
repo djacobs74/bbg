@@ -48,6 +48,7 @@
 			<div class="row" v-if="game_win != ''">
 				<div v-if="game_win == 'true'"class="col-12 text-center">
 					<h3>CONGRATULATIONS! YOU HAVE DEFEATED DER MAJICKER AND SAVED THE WORLD!</h3>
+					<h4>Total Points: {{ points }}</h4>
 				</div>
 				<div v-if="game_win == 'false'"class="col-12 text-center">
 					<h3>DER MAJICKER HAS UPLOADED HIS ZOMBIE VIRUS TO THE INTERNET! YOU HAVE BEEN TURNED INTO A ZOMBIE!!</h3>

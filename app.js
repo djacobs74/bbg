@@ -20,6 +20,7 @@ new Vue({
 		summon_dermajicker: 'false',
 		game_win: '',
 		dm_dead: 'false',
+		points: 0,
 	},
 	methods: {
 		phillipAttack: function() {
@@ -342,9 +343,11 @@ new Vue({
 					this.game_win = 'true';	
 				} 
 			}
+			this.points = this.playerHealth + this.timer + this.betaComponents;
 				 
 			console.log('win check = ' + this.game_win);
-		}
+		},
+
 	},
 
 })
