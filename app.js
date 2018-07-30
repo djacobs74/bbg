@@ -293,6 +293,7 @@ new Vue({
 					this.summon_dermajicker = 'false';
 				}
 				console.log('beta check ' + this.summon_dermajicker);
+				console.log('beta add = ' + beta_add);
 			}
 		},
 		use_beta: function() {
