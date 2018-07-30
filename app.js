@@ -273,8 +273,8 @@ new Vue({
 			if (this.beta_b > 0) {
 				beta_b_true = 1;
 			}
-			if (this.beta_a > 0) {
-				beta_a_true = 1;
+			if (this.beta_e > 0) {
+				beta_e_true = 1;
 			}
 			if (this.beta_t > 0) {
 				beta_t_true = 1;
