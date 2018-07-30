@@ -11,6 +11,7 @@ new Vue({
 		beta_e: 0,
 		beta_t: 0,
 		beta_a: 0,
+		beta_u: 0,
 		searchChance: 100,
 		medPacks: 0,
 		virusPatch: 0,
@@ -158,7 +159,6 @@ new Vue({
         },
         zombieDead: function() {
         	if (this.enemyHealth <= 0) {
-        		this.win_check();
         		this.zombieType = 'No';
         		
         	}
@@ -198,6 +198,7 @@ new Vue({
 				this.searchChance -= 25;
 				this.chances();
 				this.betaCheck();
+				this.betaUniversal();
 				this.turnCounter();
 			}
 		},
@@ -264,10 +265,31 @@ new Vue({
 			console.log('betaType result = ' + result);
 		},
 		betaCheck: function() {
+			var beta_b_true = 0
+			var beta_e_true = 0
+			var beta_t_true = 0
+			var beta_a_true = 0
+			
+			if (this.beta_b > 0) {
+				beta_b_true = 1;
+			}
+			if (this.beta_e > 0) {
+				beta_e_true = 1;
+			}
+			if (this.beta_t > 0) {
+				beta_t_true = 1;
+			}
+			if (this.beta_a > 0) {
+				beta_a_true = 1;
+			}
+			var beta_add = (beta_b_true + beta_e_true + beta_t_true + beta_a_true)
 			if (this.game_win == '') {
 				if (this.beta_b > 0 && this.beta_e > 0 && this.beta_t > 0 && this.beta_a > 0) {
 					this.summon_dermajicker = 'true';
-				} else {
+				} else if (beta_add == 3 && this.beta_u == 1) {
+					this.summon_dermajicker = 'true';
+				}
+				else {
 					this.summon_dermajicker = 'false';
 				}
 				console.log('beta check ' + this.summon_dermajicker);
@@ -280,6 +302,15 @@ new Vue({
 				this.enemyHealth = 100;
 				this.summon_dermajicker = 'false';
 			}		
+		},
+		betaUniversal: function() {
+			if (this.beta_u == 0) {
+				result = this.numberGenerator(1, 20);
+				if (result == 1) {
+					this.beta_u +=1;
+				}
+			}
+				
 		},
 		start_game: function() {
 			$('.game-off').hide();

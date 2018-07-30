@@ -123,7 +123,7 @@
 					<div v-if="room != 0" class="col-12 text-center">Room: {{ room }}</div>
 					<div v-if="room != 0" class="text-center">NO ZOMBIES HERE</div>
 					<div v-if="room == 0" class="col-12 text-center">I.T. Room</div>
-					<div v-if="room == 0" class="text-center">Move Out And Save The World One User At A Time!</div>
+					<div v-if="room == 0" class="text-center">Move Out And Save The World One Stupid User At A Time!</div>
 					<div v-if="searchChance == 0" class="text-center">There Is Nothing Else Of Value Here. Time To Move On!</div>
 					<!-- <div v-if="room != 1" class="text-center">Searches Left: {{ searchChance }}</div> -->
 					<section class="text-center" v-if="room != 0 && searchChance != 0">Search Chance: {{ chanceText }}<!-- <div class="search-chance-bar" :style="{width: searchChance + '%'}"></div> --></section>
@@ -138,6 +138,7 @@
 				<div class="col-12">E Components Found: {{ beta_e }}</div>
 				<div class="col-12">T Components Found: {{ beta_t }}</div>
 				<div class="col-12">A Components Found: {{ beta_a }}</div>
+				<div class="col-12">Universal Component Found: {{ beta_u }}</div>
 				<div class="col-12"><button v-bind:class="{ disabled: summon_dermajicker != 'true' }" class="summon" @click="use_beta">Summon Der Majicker!</button></div>
 			</div>
 			<br>
