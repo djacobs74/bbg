@@ -21,6 +21,11 @@ new Vue({
 		game_win: '',
 		dm_dead: 'false',
 		points: 0,
+		wep_common: 3,
+		wep_char: 6,
+		wep_char_match: 9,
+		red_stapler: 'false',
+
 	},
 	methods: {
 		phillipAttack: function() {
